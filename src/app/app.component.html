@@ -1,0 +1,87 @@
+<div class="container listBorders">
+  <div *ngIf="isLoading">
+    <img src="../assets/img/loader.gif" />
+  </div>
+  <div *ngFor="let country of countries">
+    <div *ngIf="!isLoading">
+      <div class="row">
+        <div class="col-sm">
+          <img
+            class="rounded-circle imgBorders profilePic"
+            alt="100x100"
+            src="{{
+              country.imgs
+                ? country.imgs
+                : 'https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg'
+            }}"
+          />
+        </div>
+        <div class="col-sm">
+          <h2>{{ country.firstName }} {{ country.lastName }}</h2>
+          <p>{{ country.bio }}</p>
+          <p><i class="bi-alarm"></i> {{ country.location }}</p>
+
+          <i class="bi-github" role="img" aria-label="GitHub"></i>
+          <P>{{ country.externalLinks }}</P>
+        </div>
+      </div>
+      <div class="row mt4">
+        <div class="col-sm">Github Link : {{ country.gitHubLink }}</div>
+      </div>
+      <div id="content">
+        <!-- <div id="contentInside" *ngFor="let container of country.repository"> -->
+        <!-- <app-git-repo-details [containers] = "container" [demo]="country.repository"></app-git-repo-details> -->
+        <app-git-repo-list
+          [containers]="country.repository"
+          [demo]=""
+        ></app-git-repo-list>
+        <!-- </div> -->
+      </div>
+      <div class="d-flex justify-content-between p-2">
+        <!-- <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+        </ngb-pagination> -->
+
+        <ngb-pagination
+          [collectionSize]="70"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          (pageChange)="refreshCountries()"
+        >
+          <ng-template ngbPaginationPages let-page let-pages="pages">
+            <!-- <li class="ngb-custom-pages-item" *ngIf="pages.length > 0"> -->
+            <div
+              class="form-group d-flex flex-nowrap px-2"
+              style="width: 600px"
+            >
+              <!-- <label
+                        id="paginationInputLabel"
+                        for="paginationInput"
+                        class="col-form-label mr-2 ml-1"
+                    >Page</label> -->
+              <!--  <input #i
+                        type="text"
+                        inputmode="numeric"
+                        pattern="[0-9]*"
+                        class="form-control custom-pages-input"
+                        id="paginationInput"
+                        [value]="page"
+                        (keyup.enter)="selectPage(i.value)"
+                        (blur)="selectPage(i.value)"
+                        (input)="formatInput($any($event).target)"
+                        aria-labelledby="paginationInputLabel paginationDescription"
+                        style="width: 2.5rem"
+                    />
+                    <span id="paginationDescription" class="col-form-label text-nowrap px-2">
+                        of {{pages.length}}</span> -->
+            </div>
+            <!-- </li> -->
+          </ng-template>
+        </ngb-pagination>
+        <!-- 
+
+        <button>Previous</button>
+        <button>Next</button> -->
+      </div>
+    </div>
+  </div>
+</div>

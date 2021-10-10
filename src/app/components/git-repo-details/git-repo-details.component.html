@@ -1,0 +1,7 @@
+<div class="repoBorder">
+  <h2 class="bv">{{ details.name }}</h2>
+  <p>{{ details.description }}</p>
+  <label class="btn-primary mr-1" *ngFor="let item of details.topics">
+    <button ngbButton ngbButtonLabel class="tw">{{ item }}</button>
+  </label>
+</div>
